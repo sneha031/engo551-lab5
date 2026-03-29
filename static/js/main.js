@@ -1,8 +1,8 @@
 const enableLocationBtn = document.getElementById("enableLocationBtn");
 const locationGate = document.getElementById("locationGate");
 const shareStatusBtn = document.getElementById("shareStatusBtn");
+const geojsonBox = document.getElementById("geojsonBox");
 
-let marker = null;
 let hasLocationPermission = false;
 
 const map = L.map("map").setView([51.0447, -114.0719], 11);
@@ -11,23 +11,23 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors"
 }).addTo(map);
 
-function updateMapLocation(latitude, longitude) {
-    const coords = [latitude, longitude];
+function getRandomTemperature() {
+    return Math.floor(Math.random() * 101) - 40;
+}
 
-    if (!marker) {
-        marker = L.marker(coords).addTo(map);
-    } else {
-        marker.setLatLng(coords);
-    }
-
-    marker.bindPopup(`
-        <strong>Your Current Location</strong><br>
-        Latitude: ${latitude.toFixed(6)}<br>
-        Longitude: ${longitude.toFixed(6)}
-    `);
-
-    map.setView(coords, 15);
-    marker.openPopup();
+function buildGeoJSON(latitude, longitude, temperature) {
+    return {
+        type: "Feature",
+        geometry: {
+            type: "Point",
+            coordinates: [longitude, latitude]
+        },
+        properties: {
+            temperature: temperature,
+            timestamp: new Date().toISOString(),
+            source: "LiveTracker"
+        }
+    };
 }
 
 function getCurrentLocation(onSuccess) {
@@ -67,6 +67,9 @@ shareStatusBtn.addEventListener("click", () => {
     }
 
     getCurrentLocation((latitude, longitude) => {
-        updateMapLocation(latitude, longitude);
+        const fakeTemperature = getRandomTemperature();
+        const geojsonMessage = buildGeoJSON(latitude, longitude, fakeTemperature);
+
+        geojsonBox.textContent = JSON.stringify(geojsonMessage, null, 2);
     });
 });

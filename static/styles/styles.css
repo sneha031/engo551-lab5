@@ -75,6 +75,7 @@ body {
     padding: 18px;
     backdrop-filter: blur(6px);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+    margin-bottom: 22px;
 }
 
 #map {
@@ -82,6 +83,42 @@ body {
     height: 560px;
     border-radius: 16px;
     overflow: hidden;
+}
+
+.geojson-panel {
+    width: 100%;
+    background: rgba(9, 16, 39, 0.50);
+    border: 1px solid rgba(145, 180, 255, 0.18);
+    border-radius: 22px;
+    padding: 18px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+}
+
+.geojson-panel h2 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.geojson-subtitle {
+    color: #dce6ff;
+    line-height: 1.5;
+    margin-bottom: 14px;
+}
+
+.geojson-box {
+    width: 100%;
+    min-height: 180px;
+    padding: 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(160, 190, 255, 0.14);
+    color: #eef4ff;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
 }
 
 .location-gate {
@@ -145,7 +182,8 @@ body {
         padding: 24px 14px 18px;
     }
 
-    .map-wrapper {
+    .map-wrapper,
+    .geojson-panel {
         padding: 12px;
         border-radius: 18px;
     }
@@ -164,5 +202,10 @@ body {
 
     .location-card {
         padding: 22px 18px;
+    }
+
+    .geojson-box {
+        min-height: 160px;
+        font-size: 0.9rem;
     }
 }
