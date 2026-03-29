@@ -9,20 +9,28 @@ body {
     min-height: 100vh;
     color: #ffffff;
     background:
-        linear-gradient(rgba(8, 12, 28, 0.35), rgba(8, 12, 28, 0.45)),
+        linear-gradient(rgba(8, 12, 28, 0.30), rgba(8, 12, 28, 0.40)),
         url("../img/backimage.jpg") center/cover no-repeat fixed;
 }
 
 .page-overlay {
     min-height: 100vh;
+    padding: 28px 20px 24px;
     display: flex;
-    align-items: flex-start;
     justify-content: center;
-    padding: 36px 20px;
+}
+
+.app-shell {
+    width: 100%;
+    max-width: 1180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hero-only {
     text-align: center;
+    margin-bottom: 22px;
 }
 
 .hero-only h1 {
@@ -36,6 +44,44 @@ body {
     font-size: 1.05rem;
     color: #dce6ff;
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.24);
+}
+
+.share-btn {
+    width: min(260px, 100%);
+    padding: 13px 18px;
+    border: none;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(135deg, #5ca6ff, #7f7cff);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+    transition: transform 0.18s ease, opacity 0.18s ease;
+    margin-top: 18px;
+    margin-bottom: 26px;
+}
+
+.share-btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.96;
+}
+
+.map-wrapper {
+    width: 100%;
+    background: rgba(9, 16, 39, 0.50);
+    border: 1px solid rgba(145, 180, 255, 0.18);
+    border-radius: 22px;
+    padding: 18px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+}
+
+#map {
+    width: 100%;
+    height: 560px;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .location-gate {
@@ -76,7 +122,7 @@ body {
     margin-bottom: 18px;
 }
 
-button {
+.location-card button {
     width: 100%;
     padding: 12px 16px;
     border: none;
@@ -89,25 +135,34 @@ button {
     transition: transform 0.18s ease, opacity 0.18s ease;
 }
 
-button:hover {
+.location-card button:hover {
     transform: translateY(-1px);
     opacity: 0.95;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 700px) {
     .page-overlay {
-        padding: 28px 16px;
+        padding: 24px 14px 18px;
     }
 
-    .location-card {
-        padding: 22px 18px;
+    .map-wrapper {
+        padding: 12px;
+        border-radius: 18px;
+    }
+
+    #map {
+        height: 430px;
     }
 
     .hero-only h1 {
-        font-size: 2.6rem;
+        font-size: 2.7rem;
     }
 
     .hero-only p {
         font-size: 0.98rem;
+    }
+
+    .location-card {
+        padding: 22px 18px;
     }
 }
