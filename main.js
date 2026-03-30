@@ -250,7 +250,8 @@ function connectToMqtt(isReconnectAttempt = false) {
             return;
         }
 
-        console.log("Connection lost:", responseObject?.errorMessage || "Unknown error");
+        setMqttStatus("Connection lost - retrying...");
+        updateConnectionUI();
         scheduleReconnect();
     };
 
@@ -287,7 +288,7 @@ function connectToMqtt(isReconnectAttempt = false) {
                 }
             });
         },
-        onFailure: (error) => {
+        onFailure: () => {
             isMqttConnected = false;
             mqttClient = null;
 
@@ -297,7 +298,6 @@ function connectToMqtt(isReconnectAttempt = false) {
                 return;
             }
 
-            console.log("Connection failed:", error?.errorMessage || "Unknown error");
             setMqttStatus("Connection Failed - retrying...");
             updateConnectionUI();
             scheduleReconnect();
@@ -369,6 +369,21 @@ startMqttBtn.addEventListener("click", () => {
 
 endMqttBtn.addEventListener("click", () => {
     disconnectMqtt();
+});
+
+window.addEventListener("offline", () => {
+    if (shouldAutoReconnect) {
+        isMqttConnected = false;
+        setMqttStatus("Internet disconnected - waiting to reconnect...");
+        updateConnectionUI();
+    }
+});
+
+window.addEventListener("online", () => {
+    if (shouldAutoReconnect && !isMqttConnected) {
+        setMqttStatus("Internet restored - reconnecting...");
+        connectToMqtt(true);
+    }
 });
 
 updateConnectionUI();
