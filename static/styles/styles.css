@@ -46,6 +46,49 @@ body {
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.24);
 }
 
+.broker-panel {
+    width: 100%;
+    background: rgba(9, 16, 39, 0.50);
+    border: 1px solid rgba(145, 180, 255, 0.18);
+    border-radius: 22px;
+    padding: 18px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+    margin-bottom: 22px;
+}
+
+.broker-grid {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 14px;
+}
+
+.broker-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #dce6ff;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.broker-field input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(160, 190, 255, 0.18);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.broker-note {
+    margin-top: 12px;
+    color: #dce6ff;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
 .share-btn {
     width: min(260px, 100%);
     padding: 13px 18px;
@@ -93,6 +136,7 @@ body {
     padding: 18px;
     backdrop-filter: blur(6px);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+    margin-bottom: 22px;
 }
 
 .geojson-panel h2 {
@@ -119,6 +163,44 @@ body {
     white-space: pre-wrap;
     word-break: break-word;
     overflow-x: auto;
+}
+
+.mqtt-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.mqtt-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.10);
+    color: #e7efff;
+}
+
+.temp-marker {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    box-shadow: 0 0 14px rgba(255, 255, 255, 0.35);
+}
+
+.temp-blue {
+    background: #2f80ff;
+}
+
+.temp-green {
+    background: #19b35d;
+}
+
+.temp-red {
+    background: #e64b4b;
 }
 
 .location-gate {
@@ -182,8 +264,13 @@ body {
         padding: 24px 14px 18px;
     }
 
+    .broker-grid {
+        grid-template-columns: 1fr;
+    }
+
     .map-wrapper,
-    .geojson-panel {
+    .geojson-panel,
+    .broker-panel {
         padding: 12px;
         border-radius: 18px;
     }
@@ -208,4 +295,14 @@ body {
         min-height: 160px;
         font-size: 0.9rem;
     }
+
+    .mqtt-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.broker-field input:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
 }

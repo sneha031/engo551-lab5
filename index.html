@@ -29,6 +29,66 @@
                 <p>Showing your location and temperature to others</p>
             </section>
 
+            <section class="broker-panel">
+                <div class="broker-grid">
+                    <div class="broker-field">
+                        <label for="brokerHost">Broker Host</label>
+                        <input
+                            type="text"
+                            id="brokerHost"
+                            value="test.mosquitto.org"
+                            placeholder="Enter MQTT broker host"
+                        />
+                    </div>
+
+                    <div class="broker-field">
+                        <label for="brokerPort">Broker Port</label>
+                        <input
+                            type="number"
+                            id="brokerPort"
+                            value="8081"
+                            placeholder="Enter MQTT broker port"
+                        />
+                    </div>
+                </div>
+
+                <div class="broker-field" style="margin-top: 14px;">
+                    <label for="mqttTopic">MQTT Topic</label>
+                    <input
+                        type="text"
+                        id="mqttTopic"
+                        value="engo551/sneha_dubey/my_temperature"
+                        placeholder="Enter MQTT topic"
+                    />
+                </div>
+
+                <div
+                    class="connection-buttons"
+                    style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap;"
+                >
+                    <button
+                        id="startMqttBtn"
+                        class="share-btn"
+                        style="margin: 0; width: 180px;"
+                    >
+                        Start Connection
+                    </button>
+
+                    <button
+                        id="endMqttBtn"
+                        class="share-btn"
+                        style="margin: 0; width: 180px; opacity: 0.7;"
+                        disabled
+                    >
+                        End Connection
+                    </button>
+                </div>
+
+                <p class="broker-note">
+                    Press Start Connection to connect to the MQTT broker. While connected, the broker host, port, and topic will be locked until you press End Connection.
+                </p>
+            </section>
+
             <button id="shareStatusBtn" class="share-btn">Share My Status</button>
 
             <section class="map-wrapper">
@@ -38,13 +98,25 @@
             <section class="geojson-panel">
                 <h2>Generated GeoJSON Message</h2>
                 <p class="geojson-subtitle">
-                    When you click Share My Status, your current location and a fake random temperature will appear here.
+                    Clicking Share My Status gets your location, creates a fake random temperature, and builds a GeoJSON message.
                 </p>
                 <pre id="geojsonBox" class="geojson-box">No GeoJSON message generated yet.</pre>
+            </section>
+
+            <section class="geojson-panel mqtt-panel">
+                <div class="mqtt-header">
+                    <h2>MQTT Publish / Subscribe</h2>
+                    <span id="mqttStatus" class="mqtt-status">Not Connected</span>
+                </div>
+                <p class="geojson-subtitle">
+                    This box shows the same GeoJSON message after it is published to MQTT and received back through the subscribed topic.
+                </p>
+                <pre id="receivedBox" class="geojson-box">No MQTT message received yet.</pre>
             </section>
         </main>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="../static/js/main.js"></script>
 </body>
